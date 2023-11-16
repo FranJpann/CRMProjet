@@ -21,7 +21,6 @@ struct ModelTO{
 }
 
 struct InternalLeadDTO {
-    // à définir
 }
 
 service InternalCRMService {
