@@ -1,0 +1,4 @@
+rootProject.name = 'ArchiDistribProjet'
+include 'src:main:thrift'
+findProject(':src:main:thrift')?.name = 'thrift'
+
