@@ -1,21 +1,15 @@
-namespace java internalcrm.services.thrift.impl
-
-struct calendar {
-    1: i32 day,
-    2: i32 month,
-    3: i32 year
-}
+namespace java internalcrm.thrift
 
 struct ModelTO{
     1: string firstname,
     2: string lastname,
-    3: i64 annualRevenue,
+    3: double annualRevenue,
     4: string phone,
     5: string street,
     6: string postalCode,
     7: string city,
     8: string country,
-    9: calendar creationDate,
+    9: string creationDate,
     10: string company,
     11: string stat
 }
@@ -32,8 +26,8 @@ service InternalCRMService {
     ),
 
     list<InternalLeadDTO> findLeadsByDate(
-        1: calendar startDate,
-        2: calendar endDate
+        1: string startDate,
+        2: string endDate
     ),
 
     void deleteLead(1: InternalLeadDTO lead),

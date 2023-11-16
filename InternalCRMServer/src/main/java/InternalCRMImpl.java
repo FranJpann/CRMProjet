@@ -1,11 +1,11 @@
-import internalcrm.services.thrift.impl.InternalCRMService;
-import internalcrm.services.thrift.impl.InternalLeadDTO;
-import internalcrm.services.thrift.impl.calendar;
+import internalcrm.thrift.InternalCRMService;
+import internalcrm.thrift.InternalLeadDTO;
+import internalcrm.thrift.calendar;
 import org.apache.thrift.TException;
 
 import java.util.List;
 
-public class InternalCRMHandler implements InternalCRMService.Iface {
+public class InternalCRMImpl implements InternalCRMService.Iface {
 
     @Override
     public List<InternalLeadDTO> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) throws TException {
@@ -13,7 +13,7 @@ public class InternalCRMHandler implements InternalCRMService.Iface {
     }
 
     @Override
-    public List<InternalLeadDTO> findLeadsByDate(calendar startDate, calendar endDate) throws TException {
+    public List<InternalLeadDTO> findLeadsByDate(String startDate, String endDate) throws TException {
         return null;
     }
 
