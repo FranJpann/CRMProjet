@@ -1,14 +1,20 @@
 FROM ubuntu:20.04
 
-WORKDIR /app
+WORKDIR /app/InternalCRMServer
 
-RUN apt -y update && apt -y upgrade
+RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y thrift-compiler
-RUN apt-get install -y default-jdk
+RUN apt-get install -y openjdk-17-jdk
 
-COPY gradle src ./
-COPY gradlew build.gradle settings.gradle ./
+RUN apt-get -y install wget unzip
+RUN mkdir /opt/gradle
+RUN wget https://services.gradle.org/distributions/gradle-8.2-bin.zip && unzip -d /opt/gradle gradle-8.2-bin.zip
+RUN rm gradle-8.2-bin.zip
 
-RUN ./gradlew clean build
+COPY src ./src
+COPY gradle ./gradle
+COPY build.gradle settings.gradle ./
 
-CMD ["java", "-jar", "/app/libs/InternalCRMServer-0.0.1-SNAPSHOT.war"]
+RUN /opt/gradle/gradle-8.2/bin/gradle clean build
+
+CMD ["java", "-jar", "/app/InternalCRMServer/build/libs/InternalCRMServer-0.0.1-SNAPSHOT.war"]

@@ -16,7 +16,7 @@ gretty {
 }
 
 java {
-    sourceCompatibility = '18'
+    sourceCompatibility = '17'
 }
 
 repositories {
