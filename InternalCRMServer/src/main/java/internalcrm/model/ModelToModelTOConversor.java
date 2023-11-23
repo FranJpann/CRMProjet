@@ -1,3 +1,5 @@
+package internalcrm.model;
+
 import internalcrm.thrift.ModelTO;
 import internalcrm.model.Model;
 

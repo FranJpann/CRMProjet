@@ -1,5 +1,13 @@
-# Build #
+# Build
 
 > ./gradlew build
 > ../docker-compose build internalcrmserver
 > ../docker-compose up internalcrmserver
+
+## TOKEN REQUEST ON SALEFORCE :
+
+> curl --request POST 'https://login.salesforce.com/services/oauth2/token'  --header 'Content-Type: application/x-www-form-urlencoded'  --data-urlencode 'grant_type=password' --data-urlencode 'client_id=<replace with client id>' --data-urlencode 'client_secret=<replace with client secret>'  --data-urlencode 'username=<replace with username>' --data-urlencode 'password=<replace with userpassword>'
+
+## RETRIVE DATA :
+
+> curl -G "https://<replace by your application>.my.salesforce.com/services/data/v45.0/query/" --header 'Content-Type: application/x-www-form-urlencoded' --header 'Authorization: Bearer <replace by your code>'  --header "Accept: application/json" -d "q=SELECT+FirstName,LastName,ConvertedAccountId+FROM+Lead" #write your query here

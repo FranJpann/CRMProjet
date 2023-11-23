@@ -1,8 +1,5 @@
 package internalcrm.model;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class Model {
     private String firstName;
     private String lastName;
