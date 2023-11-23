@@ -1,7 +1,14 @@
-FROM openjdk:21
+FROM ubuntu:20.04
 
 WORKDIR /app
 
-COPY ./build/libs/InternalCRMServer-0.0.1-SNAPSHOT.war /app/war/
+RUN apt -y update && apt -y upgrade
+RUN apt-get install -y thrift-compiler
+RUN apt-get install -y default-jdk
 
-CMD ["java", "-jar", "war/InternalCRMServer-0.0.1-SNAPSHOT.war"]
+COPY gradle src ./
+COPY gradlew build.gradle settings.gradle ./
+
+RUN ./gradlew clean build
+
+CMD ["java", "-jar", "/app/libs/InternalCRMServer-0.0.1-SNAPSHOT.war"]
