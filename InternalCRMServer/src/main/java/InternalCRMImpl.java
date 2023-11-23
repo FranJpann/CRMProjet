@@ -1,6 +1,5 @@
 import internalcrm.thrift.InternalCRMService;
 import internalcrm.thrift.InternalLeadDTO;
-import internalcrm.thrift.calendar;
 import org.apache.thrift.TException;
 
 import java.util.List;

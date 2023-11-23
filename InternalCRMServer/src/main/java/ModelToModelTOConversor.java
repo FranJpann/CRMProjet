@@ -1,9 +1,7 @@
 import internalcrm.thrift.ModelTO;
 import internalcrm.model.Model;
-import internalcrm.thrift.date;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ModelToModelTOConversor {
