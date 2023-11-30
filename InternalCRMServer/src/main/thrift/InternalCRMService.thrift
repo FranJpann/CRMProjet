@@ -1,8 +1,7 @@
 namespace java internalcrm.thrift
 
-struct ModelTO{
-    1: string firstname,
-    2: string lastname,
+struct InternalLeadDTO {
+    1: string name,
     3: double annualRevenue,
     4: string phone,
     5: string street,
@@ -11,10 +10,7 @@ struct ModelTO{
     8: string country,
     9: string creationDate,
     10: string company,
-    11: string stat
-}
-
-struct InternalLeadDTO {
+    11: string state
 }
 
 service InternalCRMService {

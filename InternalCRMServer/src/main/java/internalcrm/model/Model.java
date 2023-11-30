@@ -13,6 +13,23 @@ public class Model {
     private String company;
     private String state;
 
+    public Model(String firstName, String lastName, Double annualRevenue,
+                 String phone, String street, String postalCode,
+                 String city, String country, String creationDate,
+                 String company, String state) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.annualRevenue = annualRevenue;
+        this.phone = phone;
+        this.street = street;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+        this.creationDate = creationDate;
+        this.company = company;
+        this.state = state;
+    }
+
     public String getFirstName() {
         return firstName;
     }
