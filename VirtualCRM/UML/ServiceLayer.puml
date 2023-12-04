@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ThriftInternalCRMServiceServlet
+interface ThriftInternalCRMService
+class ThriftInternalCRMServiceImpl
+class InternalLeadDTO
+
+package
+
+ThriftInternalCRMServiceServlet ..> ThriftInternalCRMService
+ThriftInternalCRMServiceServlet ..> ThriftInternalCRMServiceImpl
+
+ThriftInternalCRMServiceImpl ..|> ThriftInternalCRMService
+@enduml

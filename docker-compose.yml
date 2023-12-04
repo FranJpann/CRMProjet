@@ -1,9 +1,20 @@
 version: '3'
 services:
-  internalcrmserver:
-    container_name: internalcrmserver
+  internalcrm:
+    container_name: internalcrm
     build:
-      context: ./InternalCRMServer
+      context: InternalCRM
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - 9090:9090
+    expose:
+      - 9090
+  virtualcrm:
+    container_name: virtualcrm
+    build:
+      context: VirtualCRM
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
