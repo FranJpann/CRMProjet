@@ -7,7 +7,7 @@ plugins {
     id "com.linecorp.thrift-gradle-plugin" version "0.5.0"
 }
 
-group = 'com.example'
+group = 'com.internalcrm'
 version = '0.0.1-SNAPSHOT'
 
 gretty {
