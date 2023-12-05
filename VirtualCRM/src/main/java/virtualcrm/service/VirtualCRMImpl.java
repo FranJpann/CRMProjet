@@ -19,10 +19,13 @@ public class VirtualCRMImpl implements CRMService {
         InternalCRMImpl internalCRM = new InternalCRMImpl();
         SaleforceImpl saleforce = new SaleforceImpl();
 
-        return LeadConversor.mergeListsVirtualLeads(
+        List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
                 saleforce.findLeads(lowAnnualRevenue, highAnnualRevenue, state),
                 internalCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state)
         );
+        LeadConversor.setGeolocalisation(virtualLeads);
+
+        return virtualLeads;
     }
 
     @Override
@@ -30,9 +33,12 @@ public class VirtualCRMImpl implements CRMService {
         InternalCRMImpl internalCRM = new InternalCRMImpl();
         SaleforceImpl saleforce = new SaleforceImpl();
 
-        return LeadConversor.mergeListsVirtualLeads(
+        List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
                 saleforce.findLeadsByDate(startDate, endDate),
                 internalCRM.findLeadsByDate(startDate, endDate)
         );
+        LeadConversor.setGeolocalisation(virtualLeads);
+
+        return virtualLeads;
     }
 }

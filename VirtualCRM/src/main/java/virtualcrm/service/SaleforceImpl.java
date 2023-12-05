@@ -40,7 +40,7 @@ public class SaleforceImpl implements CRMService {
 
     private String GETRequestToSaleforce(String query) {
 
-        final String token = "Bearer 00D07000000YPGQ!AR4AQErLzDcy006eeu11uFWjmE7bTJmB2MqmxdPjoOln_zlrJIKUCwoObqAnBrPHMObk3Wrx5i.oHGpa3OIcy2MQ1wScgg6N";
+        final String token = "00D07000000YPGQ!AR4AQCPn2DgUNiMg5tSvrHzMpGotwIFXaa5AhWpH_LggpvjZ1yJky6MDe5Sp4hKy8NdvhkBTYkZe8Ni0cnthc3G6uyAlHZi1";
         final String endpoint = "https://univangers-dev-ed.develop.my.salesforce.com/services/data/v45.0/query/";
         final String url = endpoint + "?q=" + query;
 
@@ -50,7 +50,7 @@ public class SaleforceImpl implements CRMService {
 
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Authorization", token);
+            connection.setRequestProperty("Authorization", "Bearer "+token);
             connection.setRequestProperty("Accept", "application/json");
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));

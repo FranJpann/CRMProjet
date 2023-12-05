@@ -1,7 +1,9 @@
 package virtualcrm.model;
 
+import ch.qos.logback.classic.spi.LoggerContextVO;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import virtualcrm.service.GeolocalisationImpl;
 import virtualcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;
@@ -54,13 +56,9 @@ public class LeadConversor {
             String country = address.isNull("country") ? "" : address.getString("country");
             String stateJSON = address.isNull("state") ? "" : address.getString("state");
 
-            Double latitude = address.isNull("latitude") ? null : address.getDouble("latitude");
-            Double longitude = address.isNull("longitude") ? null : address.getDouble("longitude");
-            GeographicPointDto geographicPoint = new GeographicPointDto(latitude, longitude);
-
             virtualLeads.add(new VirtualLeadDto(
                     FirstName, LastName, AnnualRevenue, Phone, street,
-                    postalCode, city, country, CreatedDate, geographicPoint, Company, stateJSON
+                    postalCode, city, country, CreatedDate, Company, stateJSON
             ));
         }
 
@@ -75,5 +73,18 @@ public class LeadConversor {
         }
 
         return resultList;
+    }
+
+    public static void setGeolocalisation(List<VirtualLeadDto> virtualLeads) {
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
+        String query;
+        for(VirtualLeadDto virtualLead: virtualLeads){
+            query = "city="+virtualLead.getCity().replaceAll(" ", "+")+
+                    "&country="+virtualLead.getCountry().replaceAll(" ", "+")+
+                    "&postalcode="+virtualLead.getPostalCode().replaceAll(" ", "+")+
+                    "&street="+virtualLead.getStreet().replaceAll(" ", "+")+
+                    "&format=json&limit=1";
+            virtualLead.setGeographicPointDto(geolocalisation.GETRequestToOpenStreetMap(query));
+        }
     }
 }

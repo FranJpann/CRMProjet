@@ -29,25 +29,8 @@ public class VirtualLeadDto {
         this.creationDate = creationDate;
         this.company = company;
         this.state = state;
-    }
 
-    public VirtualLeadDto(String firstName, String lastName, Double annualRevenue,
-                          String phone, String street, String postalCode,
-                          String city, String country, String creationDate,
-                          GeographicPointDto geographicPointDto,
-                          String company, String state) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.annualRevenue = annualRevenue;
-        this.phone = phone;
-        this.street = street;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.country = country;
-        this.creationDate = creationDate;
-        this.geographicPointDto = geographicPointDto;
-        this.company = company;
-        this.state = state;
+        this.geographicPointDto = null;
     }
 
     public String getFirstName() {
@@ -148,6 +131,6 @@ public class VirtualLeadDto {
 
     public String toString() {
         return firstName+","+lastName+","+annualRevenue+","+phone+","+street+","+postalCode+","+
-                city+","+country+","+creationDate+","+company+","+state;
+                city+","+country+","+creationDate+","+company+","+state+",{"+geographicPointDto.toString()+"}";
     }
 }

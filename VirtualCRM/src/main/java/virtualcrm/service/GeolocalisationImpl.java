@@ -1,5 +1,7 @@
 package virtualcrm.service;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import virtualcrm.model.GeographicPointDto;
 
 import java.io.BufferedReader;
@@ -12,7 +14,7 @@ public class GeolocalisationImpl implements GeolocalisationService{
     @Override
     public GeographicPointDto GETRequestToOpenStreetMap(String query) {
 
-        String url = "https://nominatim.openstreetmap.org/search?";
+        String url = "https://nominatim.openstreetmap.org/search?" + query;
 
         try {
             URL urlObj = new URL(url);
@@ -33,8 +35,17 @@ public class GeolocalisationImpl implements GeolocalisationService{
             reader.close();
             connection.disconnect();
 
-            System.out.println(response);
-            return null;
+            JSONArray array = new JSONArray(response.toString());
+            Double lat = null;
+            Double lon = null;
+
+            if(!array.isNull(0)){
+                JSONObject object = new JSONObject(array.get(0).toString());
+                lat = object.isNull("lat") ? null : Double.valueOf(object.getString("lat"));
+                lon = object.isNull("lon") ? null : Double.valueOf(object.getString("lon"));
+            }
+
+            return new GeographicPointDto(lat, lon);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
