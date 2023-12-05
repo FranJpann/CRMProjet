@@ -3,6 +3,7 @@ package virtualcrm.service;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import virtualcrm.model.GeographicPointDto;
+import virtualcrm.model.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
 
 import java.io.BufferedReader;
@@ -18,55 +19,23 @@ public class SaleforceImpl implements CRMService {
 
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
-        // String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company+FROM+Lead+WHERE+AnnualRevenue+>=+"+lowAnnualRevenue+"+AND+AnnualRevenue+<=+"+highAnnualRevenue;
-        // Fake query because saleforce provide data with null AnnualRevenue (right query is above)
-        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company+FROM+Lead";
+        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+AnnualRevenue+>=+"+lowAnnualRevenue+"+AND+AnnualRevenue+<=+"+highAnnualRevenue;
+
         String response = sendGETRequest(query);
 
         JSONObject responseJSON = new JSONObject(response);
-        JSONArray records = new JSONArray(responseJSON.get("records").toString());
 
-        List<VirtualLeadDto> virtualLeads = new ArrayList<>();
-
-        for(Object recordObj: records) {
-
-            JSONObject recordJSON = new JSONObject(recordObj.toString());
-            String FirstName = recordJSON.isNull("FirstName") ? "" : recordJSON.getString("FirstName");
-            String LastName = recordJSON.isNull("LastName") ? "" : recordJSON.getString("LastName");
-            Double AnnualRevenue = recordJSON.isNull("AnnualRevenue") ? null : recordJSON.getDouble("AnnualRevenue");
-            String Phone = recordJSON.isNull("Phone") ? "" : recordJSON.getString("Phone");
-            String Company = recordJSON.isNull("Company") ? "" : recordJSON.getString("Company");
-
-            JSONObject address = recordJSON.getJSONObject("Address");
-            String street = address.isNull("street") ? "" : address.getString("street");
-            String postalCode = address.isNull("postalCode") ? "" : address.getString("postalCode");
-            String city = address.isNull("city") ? "" : address.getString("city");
-            String country = address.isNull("country") ? "" : address.getString("country");
-            String stateJSON = address.isNull("state") ? "" : address.getString("state");
-
-            // Pas de date de création dans saleforce
-            String creationDate = null;
-
-            Double latitude = address.isNull("latitude") ? null : address.getDouble("latitude");
-            Double longitude = address.isNull("longitude") ? null : address.getDouble("longitude");
-            GeographicPointDto geographicPoint = new GeographicPointDto(latitude, longitude);
-
-            virtualLeads.add(new VirtualLeadDto(
-                FirstName, LastName, AnnualRevenue, Phone, street,
-                    postalCode, city, country, creationDate, geographicPoint, Company, stateJSON
-            ));
-        }
-
-        return virtualLeads;
+        return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
     }
 
     @Override
     public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
-        String query = "";
+        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+CreatedDate+>+"+startDate+"+AND+CreatedDate+<+"+endDate;
         String response = sendGETRequest(query);
 
-        System.out.println(response);
-        return null;
+        JSONObject responseJSON = new JSONObject(response);
+
+        return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
     }
 
     private String sendGETRequest(String query) {

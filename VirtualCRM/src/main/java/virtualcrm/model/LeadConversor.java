@@ -1,5 +1,7 @@
 package virtualcrm.model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import virtualcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;
@@ -28,6 +30,41 @@ public class LeadConversor {
         }
 
         return  virtualLeads;
+    }
+
+    public static List<VirtualLeadDto> JSONLeadsToVirtualLeads(JSONObject response) {
+        JSONArray records = new JSONArray(response.get("records").toString());
+
+        List<VirtualLeadDto> virtualLeads = new ArrayList<>();
+
+        for(Object recordObj: records) {
+
+            JSONObject recordJSON = new JSONObject(recordObj.toString());
+            String FirstName = recordJSON.isNull("FirstName") ? "" : recordJSON.getString("FirstName");
+            String LastName = recordJSON.isNull("LastName") ? "" : recordJSON.getString("LastName");
+            Double AnnualRevenue = recordJSON.isNull("AnnualRevenue") ? null : recordJSON.getDouble("AnnualRevenue");
+            String Phone = recordJSON.isNull("Phone") ? "" : recordJSON.getString("Phone");
+            String Company = recordJSON.isNull("Company") ? "" : recordJSON.getString("Company");
+            String CreatedDate = recordJSON.isNull("CreatedDate") ? "" : recordJSON.getString("CreatedDate");
+
+            JSONObject address = recordJSON.getJSONObject("Address");
+            String street = address.isNull("street") ? "" : address.getString("street");
+            String postalCode = address.isNull("postalCode") ? "" : address.getString("postalCode");
+            String city = address.isNull("city") ? "" : address.getString("city");
+            String country = address.isNull("country") ? "" : address.getString("country");
+            String stateJSON = address.isNull("state") ? "" : address.getString("state");
+
+            Double latitude = address.isNull("latitude") ? null : address.getDouble("latitude");
+            Double longitude = address.isNull("longitude") ? null : address.getDouble("longitude");
+            GeographicPointDto geographicPoint = new GeographicPointDto(latitude, longitude);
+
+            virtualLeads.add(new VirtualLeadDto(
+                    FirstName, LastName, AnnualRevenue, Phone, street,
+                    postalCode, city, country, CreatedDate, geographicPoint, Company, stateJSON
+            ));
+        }
+
+        return virtualLeads;
     }
 
     public static List<VirtualLeadDto> mergeListsVirtualLeads(List<VirtualLeadDto> leads1, List<VirtualLeadDto> leads2){
