@@ -21,7 +21,7 @@ public class SaleforceImpl implements CRMService {
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
         String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+AnnualRevenue+>=+"+lowAnnualRevenue+"+AND+AnnualRevenue+<=+"+highAnnualRevenue;
 
-        String response = sendGETRequest(query);
+        String response = GETRequestToSaleforce(query);
 
         JSONObject responseJSON = new JSONObject(response);
 
@@ -30,15 +30,15 @@ public class SaleforceImpl implements CRMService {
 
     @Override
     public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
-        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+CreatedDate+>+"+startDate+"+AND+CreatedDate+<+"+endDate;
-        String response = sendGETRequest(query);
+        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+CreatedDate+>+"+startDate+"T00:00:00Z+AND+CreatedDate+<+"+endDate+"T00:00:00Z";
+        String response = GETRequestToSaleforce(query);
 
         JSONObject responseJSON = new JSONObject(response);
 
         return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
     }
 
-    private String sendGETRequest(String query) {
+    private String GETRequestToSaleforce(String query) {
 
         final String token = "Bearer 00D07000000YPGQ!AR4AQErLzDcy006eeu11uFWjmE7bTJmB2MqmxdPjoOln_zlrJIKUCwoObqAnBrPHMObk3Wrx5i.oHGpa3OIcy2MQ1wScgg6N";
         final String endpoint = "https://univangers-dev-ed.develop.my.salesforce.com/services/data/v45.0/query/";
