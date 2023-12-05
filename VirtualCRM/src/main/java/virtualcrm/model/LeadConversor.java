@@ -29,4 +29,14 @@ public class LeadConversor {
 
         return  virtualLeads;
     }
+
+    public static List<VirtualLeadDto> mergeListsVirtualLeads(List<VirtualLeadDto> leads1, List<VirtualLeadDto> leads2){
+        List<VirtualLeadDto> resultList = leads1;
+
+        for(VirtualLeadDto lead: leads2) {
+            if(!resultList.contains(lead)) resultList.add(lead);
+        }
+
+        return resultList;
+    }
 }

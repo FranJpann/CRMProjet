@@ -29,22 +29,31 @@ public class SaleforceImpl implements CRMService {
         List<VirtualLeadDto> virtualLeads = new ArrayList<>();
 
         for(Object recordObj: records) {
+
             JSONObject recordJSON = new JSONObject(recordObj.toString());
-            JSONObject address = new JSONObject(recordJSON.getJSONObject("Address"));
+            String FirstName = recordJSON.isNull("FirstName") ? "" : recordJSON.getString("FirstName");
+            String LastName = recordJSON.isNull("LastName") ? "" : recordJSON.getString("LastName");
+            Double AnnualRevenue = recordJSON.isNull("AnnualRevenue") ? null : recordJSON.getDouble("AnnualRevenue");
+            String Phone = recordJSON.isNull("Phone") ? "" : recordJSON.getString("Phone");
+            String Company = recordJSON.isNull("Company") ? "" : recordJSON.getString("Company");
+
+            JSONObject address = recordJSON.getJSONObject("Address");
+            String street = address.isNull("street") ? "" : address.getString("street");
+            String postalCode = address.isNull("postalCode") ? "" : address.getString("postalCode");
+            String city = address.isNull("city") ? "" : address.getString("city");
+            String country = address.isNull("country") ? "" : address.getString("country");
+            String stateJSON = address.isNull("state") ? "" : address.getString("state");
+
+            // Pas de date de création dans saleforce
+            String creationDate = null;
+
+            Double latitude = address.isNull("latitude") ? null : address.getDouble("latitude");
+            Double longitude = address.isNull("longitude") ? null : address.getDouble("longitude");
+            GeographicPointDto geographicPoint = new GeographicPointDto(latitude, longitude);
 
             virtualLeads.add(new VirtualLeadDto(
-                    recordJSON.getString("FirstName"),
-                    recordJSON.getString("LastName"),
-                    recordJSON.getDouble("AnnualRevenue"),
-                    recordJSON.getString("Phone"),
-                    address.getString("street"),
-                    address.getString("postalCode"),
-                    address.getString("city"),
-                    address.getString("country"),
-                    null,
-                    new GeographicPointDto(address.getDouble("latitude"), address.getDouble("longitude")),
-                    recordJSON.getString("Company"),
-                    address.getString("state")
+                FirstName, LastName, AnnualRevenue, Phone, street,
+                    postalCode, city, country, creationDate, geographicPoint, Company, stateJSON
             ));
         }
 
@@ -62,7 +71,7 @@ public class SaleforceImpl implements CRMService {
 
     private String sendGETRequest(String query) {
 
-        final String token = "Bearer 00D07000000YPGQ!AR4AQMJIDt7XN2KWJQhvroDscGQTOcDzbAaetatv78x1JxOytzfA6xNo6nfo87OSME9npBsvUWtdEbqnUXw3JUYqNzxxqQfn";
+        final String token = "Bearer 00D07000000YPGQ!AR4AQErLzDcy006eeu11uFWjmE7bTJmB2MqmxdPjoOln_zlrJIKUCwoObqAnBrPHMObk3Wrx5i.oHGpa3OIcy2MQ1wScgg6N";
         final String endpoint = "https://univangers-dev-ed.develop.my.salesforce.com/services/data/v45.0/query/";
         final String url = endpoint + "?q=" + query;
 
