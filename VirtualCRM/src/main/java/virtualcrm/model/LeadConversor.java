@@ -8,11 +8,7 @@ import java.util.List;
 
 public class LeadConversor {
 
-    public static List<VirtualLeadDto> LeadsToVirtualLeads(List<InternalLeadDTO> internalLeads) {
-        return internalLeadsToVirtualLeads(internalLeads);
-    }
-
-    private static List<VirtualLeadDto> internalLeadsToVirtualLeads(List<InternalLeadDTO> internalLeads) {
+    public static List<VirtualLeadDto> internalLeadsToVirtualLeads(List<InternalLeadDTO> internalLeads) {
         List<VirtualLeadDto> virtualLeads = new ArrayList<>();
 
         for(InternalLeadDTO internalLead: internalLeads) {

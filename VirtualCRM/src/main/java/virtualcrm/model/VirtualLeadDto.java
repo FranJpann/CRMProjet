@@ -3,7 +3,7 @@ package virtualcrm.model;
 public class VirtualLeadDto {
     private String firstName;
     private String lastName;
-    private Double annualRevenue;
+    private double annualRevenue;
     private String phone;
     private String street;
     private String postalCode;
@@ -14,7 +14,7 @@ public class VirtualLeadDto {
     private String company;
     private String state;
 
-    public VirtualLeadDto(String firstName, String lastName, Double annualRevenue,
+    public VirtualLeadDto(String firstName, String lastName, double annualRevenue,
                           String phone, String street, String postalCode,
                           String city, String country, String creationDate,
                           String company, String state) {
@@ -31,10 +31,11 @@ public class VirtualLeadDto {
         this.state = state;
     }
 
-    public VirtualLeadDto(String firstName, String lastName, Double annualRevenue,
+    public VirtualLeadDto(String firstName, String lastName, double annualRevenue,
                           String phone, String street, String postalCode,
                           String city, String country, String creationDate,
-                          GeographicPointDto geographicPointDto, String company, String state) {
+                          GeographicPointDto geographicPointDto,
+                          String company, String state) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualRevenue = annualRevenue;

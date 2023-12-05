@@ -12,51 +12,22 @@ import virtualcrm.thrift.InternalLeadDTO;
 import java.util.Calendar;
 import java.util.List;
 
-public class VirtualCRMImpl implements VirtualCRMService {
-    public static String internalHost = "172.17.0.1";
-    public static int internalPort = 9090;
+public class VirtualCRMImpl implements CRMService {
 
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
-        List<InternalLeadDTO> internalLeads = null;
+        InternalCRMImpl internalCRM = new InternalCRMImpl();
+        SaleforceImpl saleforce = new SaleforceImpl();
 
-        try {
-            TTransport transport;
-            transport = new TSocket(internalHost, internalPort);
-            transport.open();
 
-            TProtocol protocol = new TBinaryProtocol(transport);
-            InternalCRMService.Client client = new InternalCRMService.Client(protocol);
-
-            internalLeads = client.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
-
-            transport.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return LeadConversor.LeadsToVirtualLeads(internalLeads);
+        // A FUSIONIONNER
+        saleforce.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
+        return internalCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
     }
 
     @Override
     public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
-        List<InternalLeadDTO> internalLeads = null;
-
-        try {
-            TTransport transport;
-            transport = new TSocket(internalHost, internalPort);
-            transport.open();
-
-            TProtocol protocol = new TBinaryProtocol(transport);
-            InternalCRMService.Client client = new InternalCRMService.Client(protocol);
-
-            internalLeads = client.findLeadsByDate(startDate, endDate);
-
-            transport.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return LeadConversor.LeadsToVirtualLeads(internalLeads);
+        InternalCRMImpl internalCRM = new InternalCRMImpl();
+        return internalCRM.findLeadsByDate(startDate, endDate);
     }
 }
