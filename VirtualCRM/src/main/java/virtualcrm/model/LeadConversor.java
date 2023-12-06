@@ -8,12 +8,13 @@ import virtualcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 public class LeadConversor {
 
-    public static List<VirtualLeadDto> internalLeadsToVirtualLeads(List<InternalLeadDTO> internalLeads) {
-        List<VirtualLeadDto> virtualLeads = new ArrayList<>();
+    public static Collection<VirtualLeadDto> internalLeadsToVirtualLeads(Collection<InternalLeadDTO> internalLeads) {
+        Collection<VirtualLeadDto> virtualLeads = new ArrayList<>();
 
         for(InternalLeadDTO internalLead: internalLeads) {
             String[] names = internalLead.getName().split(", ");
@@ -34,10 +35,10 @@ public class LeadConversor {
         return  virtualLeads;
     }
 
-    public static List<VirtualLeadDto> JSONLeadsToVirtualLeads(JSONObject response) {
+    public static Collection<VirtualLeadDto> JSONLeadsToVirtualLeads(JSONObject response) {
         JSONArray records = new JSONArray(response.get("records").toString());
 
-        List<VirtualLeadDto> virtualLeads = new ArrayList<>();
+        Collection<VirtualLeadDto> virtualLeads = new ArrayList<>();
 
         for(Object recordObj: records) {
 
@@ -65,26 +66,13 @@ public class LeadConversor {
         return virtualLeads;
     }
 
-    public static List<VirtualLeadDto> mergeListsVirtualLeads(List<VirtualLeadDto> leads1, List<VirtualLeadDto> leads2){
-        List<VirtualLeadDto> resultList = leads1;
+    public static Collection<VirtualLeadDto> mergeListsVirtualLeads(Collection<VirtualLeadDto> leads1, Collection<VirtualLeadDto> leads2){
+        Collection<VirtualLeadDto> resultList = leads1;
 
         for(VirtualLeadDto lead: leads2) {
             if(!resultList.contains(lead)) resultList.add(lead);
         }
 
         return resultList;
-    }
-
-    public static void setGeolocalisation(List<VirtualLeadDto> virtualLeads) {
-        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
-        String query;
-        for(VirtualLeadDto virtualLead: virtualLeads){
-            query = "city="+virtualLead.getCity().replaceAll(" ", "+")+
-                    "&country="+virtualLead.getCountry().replaceAll(" ", "+")+
-                    "&postalcode="+virtualLead.getPostalCode().replaceAll(" ", "+")+
-                    "&street="+virtualLead.getStreet().replaceAll(" ", "+")+
-                    "&format=json&limit=1";
-            virtualLead.setGeographicPointDto(geolocalisation.GETRequestToOpenStreetMap(query));
-        }
     }
 }

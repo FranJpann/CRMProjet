@@ -9,35 +9,38 @@ import virtualcrm.model.VirtualLeadDto;
 import virtualcrm.thrift.InternalCRMService;
 import virtualcrm.thrift.InternalLeadDTO;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class VirtualCRMImpl implements CRMService {
 
     @Override
-    public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
-        InternalCRMImpl internalCRM = new InternalCRMImpl();
-        SaleforceImpl saleforce = new SaleforceImpl();
+    public Collection<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
+        Collection<CRMService> services = new ArrayList<>();
+        services.add(new InternalCRMImpl());
+        services.add(new SaleforceImpl());
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
 
-        List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
-                saleforce.findLeads(lowAnnualRevenue, highAnnualRevenue, state),
-                internalCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state)
-        );
-        LeadConversor.setGeolocalisation(virtualLeads);
+        Collection<VirtualLeadDto> virtualLeads = new ArrayList<>();
+        for(CRMService service: services){
+            virtualLeads = LeadConversor.mergeListsVirtualLeads(virtualLeads, service.findLeads(lowAnnualRevenue, highAnnualRevenue, state));
+        }
+        geolocalisation.setGeolocalisation(virtualLeads);
 
         return virtualLeads;
     }
 
     @Override
-    public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
-        InternalCRMImpl internalCRM = new InternalCRMImpl();
-        SaleforceImpl saleforce = new SaleforceImpl();
+    public Collection<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
+        Collection<CRMService> services = new ArrayList<>();
+        services.add(new InternalCRMImpl());
+        services.add(new SaleforceImpl());
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
 
-        List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
-                saleforce.findLeadsByDate(startDate, endDate),
-                internalCRM.findLeadsByDate(startDate, endDate)
-        );
-        LeadConversor.setGeolocalisation(virtualLeads);
+        Collection<VirtualLeadDto> virtualLeads = new ArrayList<>();
+        for(CRMService service: services){
+            virtualLeads = LeadConversor.mergeListsVirtualLeads(virtualLeads, service.findLeadsByDate(startDate, endDate));
+        }
+        geolocalisation.setGeolocalisation(virtualLeads);
 
         return virtualLeads;
     }

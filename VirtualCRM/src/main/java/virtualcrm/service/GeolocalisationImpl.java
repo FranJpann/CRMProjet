@@ -3,12 +3,15 @@ package virtualcrm.service;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import virtualcrm.model.GeographicPointDto;
+import virtualcrm.model.VirtualLeadDto;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 
 public class GeolocalisationImpl implements GeolocalisationService{
     @Override
@@ -49,6 +52,19 @@ public class GeolocalisationImpl implements GeolocalisationService{
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void setGeolocalisation(Collection<VirtualLeadDto> virtualLeads) {
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
+        String query;
+        for(VirtualLeadDto virtualLead: virtualLeads){
+            query = "city="+virtualLead.getCity().replaceAll(" ", "+")+
+                    "&country="+virtualLead.getCountry().replaceAll(" ", "+")+
+                    "&postalcode="+virtualLead.getPostalCode().replaceAll(" ", "+")+
+                    "&street="+virtualLead.getStreet().replaceAll(" ", "+")+
+                    "&format=json&limit=1";
+            virtualLead.setGeographicPointDto(geolocalisation.GETRequestToOpenStreetMap(query));
         }
     }
 }

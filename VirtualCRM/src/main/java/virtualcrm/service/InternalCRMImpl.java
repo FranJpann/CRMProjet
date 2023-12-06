@@ -9,6 +9,7 @@ import virtualcrm.model.VirtualLeadDto;
 import virtualcrm.thrift.InternalCRMService;
 import virtualcrm.thrift.InternalLeadDTO;
 
+import java.util.Collection;
 import java.util.List;
 
 public class InternalCRMImpl implements CRMService{
@@ -16,8 +17,8 @@ public class InternalCRMImpl implements CRMService{
     public static int internalPort = 9090;
 
     @Override
-    public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
-        List<InternalLeadDTO> internalLeads = null;
+    public Collection<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
+        Collection<InternalLeadDTO> internalLeads = null;
 
         try {
             TTransport transport;
@@ -38,8 +39,8 @@ public class InternalCRMImpl implements CRMService{
     }
 
     @Override
-    public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
-        List<InternalLeadDTO> internalLeads = null;
+    public Collection<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
+        Collection<InternalLeadDTO> internalLeads = null;
 
         try {
             TTransport transport;

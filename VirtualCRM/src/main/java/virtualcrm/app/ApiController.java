@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import virtualcrm.model.VirtualLeadDto;
 import virtualcrm.service.VirtualCRMImpl;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ public class ApiController {
     @RequestMapping("/findLeads")
     public String getLead(@RequestParam(value = "lowAnnualRevenue")long lowAnnualRevenue, @RequestParam(value = "highAnnualRevenue")long highAnnualRevenue,
                         @RequestParam(value = "state")String state) {
-        List<VirtualLeadDto> virtualLeads = virtualCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
+        Collection<VirtualLeadDto> virtualLeads = virtualCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
         String response = "{";
         for(VirtualLeadDto lead: virtualLeads){
             response += "{"+lead.toString()+"},";
@@ -25,7 +26,7 @@ public class ApiController {
 
     @RequestMapping("/findLeadsByDate")
     public String getLeadByDate(@RequestParam(value = "startDate")String startDate, @RequestParam(value = "endDate")String endDate) {
-        List<VirtualLeadDto> virtualLeads = virtualCRM.findLeadsByDate(startDate, endDate);
+        Collection<VirtualLeadDto> virtualLeads = virtualCRM.findLeadsByDate(startDate, endDate);
         String response = "{";
         for(VirtualLeadDto lead: virtualLeads){
             response += "{"+lead.toString()+"},";
