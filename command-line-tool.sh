@@ -34,7 +34,10 @@ elif [ "$1" == "findLeadsByDate" ]; then
   findLeadsByDate
 elif [ "$1" == "getToken" ]; then
   getToken
+elif [ "$1" == "runDocker" ]; then
+  sudo docker-compose build
+  sudo docker-compose up
 else
-  echo "Fonction inconnue : $1. Veuillez spécifier une commande correcte (findLeads, findLeadsByDate, getToken)."
+  echo "Fonction inconnue : $1. Veuillez spécifier une commande correcte (findLeads, findLeadsByDate, getToken, runDocker)."
   exit 1
 fi
