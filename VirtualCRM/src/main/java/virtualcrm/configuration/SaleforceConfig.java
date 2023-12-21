@@ -1,6 +1,7 @@
 package virtualcrm.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ public class SaleforceConfig {
     private static final String SALESFORCE_CLIENT_NAME = "salesforce";
     private static final String CLIENT_PROPERTY_KEY = "spring.datasource.";
 
-    @Autowired
+    @Qualifier
     private Environment env;
 
     @Bean

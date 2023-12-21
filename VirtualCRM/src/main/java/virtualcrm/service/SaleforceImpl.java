@@ -3,6 +3,7 @@ package virtualcrm.service;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import virtualcrm.model.LeadConversor;
@@ -12,7 +13,6 @@ import java.util.Collection;
 @Service
 public class SaleforceImpl implements CRMService {
 
-    @Autowired
     private WebClient saleforceWebClient;
 
     @Override
@@ -37,13 +37,15 @@ public class SaleforceImpl implements CRMService {
     }
 
     private String GETRequestToSaleforce(String query) {
-        return saleforceWebClient.get()
+        /*ResponseEntity<String> response = saleforceWebClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/query")
                         .queryParam("q", query)
                         .build())
                 .retrieve()
-                .toEntity(new ParameterizedTypeReference<SalesforceResponse<SalesForceLead>>() {})
-                .block()
-                .getBody();
+                .toEntity(String.class)
+                .block();
+
+        return response.toString();*/
+        return null;
     }
 }
