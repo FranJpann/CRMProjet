@@ -2,6 +2,7 @@ package virtualcrm.service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import virtualcrm.Configuration.SaleforceConfig;
 import virtualcrm.model.GeographicPointDto;
 import virtualcrm.model.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
@@ -39,12 +40,12 @@ public class SaleforceImpl implements CRMService {
     }
 
     private String GETRequestToSaleforce(String query) {
-
-        final String token = "00D07000000YPGQ!AR4AQCPn2DgUNiMg5tSvrHzMpGotwIFXaa5AhWpH_LggpvjZ1yJky6MDe5Sp4hKy8NdvhkBTYkZe8Ni0cnthc3G6uyAlHZi1";
-        final String endpoint = "https://univangers-dev-ed.develop.my.salesforce.com/services/data/v45.0/query/";
-        final String url = endpoint + "?q=" + query;
-
         try {
+            final String token = SaleforceConfig.getToken();
+            final String endpoint = SaleforceConfig.getEndpoint();
+
+            final String url = endpoint + "?q=" + query;
+
             URL urlObj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
 
