@@ -1,34 +1,46 @@
 package virtualcrm.Configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ssl.SslProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+@Configuration
 public class SaleforceConfig {
 
-    private static final Properties properties = new Properties();
+    private final String tokenURL;
+    private final String username;
+    private final String password;
+    private final String clientid;
+    private final String clientsecret;
+    private final String endpoint;
 
-    public static String getToken() throws IOException {
-        String tokenURL = properties.getProperty("saleforce.tokenurl");
+    public SaleforceConfig(@Value("${saleforce.tokenurl}") String tokenurl,
+                           @Value("${saleforce.username}") String username,
+                           @Value("${saleforce.password}") String password,
+                           @Value("${saleforce.clientid}") String clientid,
+                           @Value("${saleforce.clientsecret}") String clientsecret,
+                           @Value("${saleforce.endpoint}") String endpoint) {
+        this.tokenURL = tokenurl;
+        this.username = username;
+        this.password = password;
+        this.clientid = clientid;
+        this.clientsecret = clientsecret;
+        this.endpoint = endpoint;
+    }
 
-        String username = properties.getProperty("saleforce.username");
-        String password = properties.getProperty("saleforce.password");
-        String clientid = properties.getProperty("saleforce.clientid");
-        String clientsecret = properties.getProperty("saleforce.clientsecret");
+    @Bean
+    public String getToken() throws IOException {
 
-        URL urlObj = new URL(tokenURL);
+        /*URL urlObj = new URL(tokenURL);
         HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
 
         connection.setRequestMethod("POST");
@@ -58,10 +70,12 @@ public class SaleforceConfig {
             // Affichage de la réponse
             System.out.println(response.toString());
             return response.toString();
-        }
+        }*/
+        return "00D07000000YPGQ!AR4AQCS17AHSUAo6QYT5kVc4ZksoJ4FeEXEGZQRbhFWV8Jgo.IoUtovTszQwEryKEJ8sj5mloV_lgiL0q3Qz61DkoRXvzddL";
     }
 
-    public static String getEndpoint() {
-        return properties.getProperty("saleforce.endpoint");
+    @Bean
+    public String getEndpoint() throws IOException {
+        return this.endpoint;
     }
 }

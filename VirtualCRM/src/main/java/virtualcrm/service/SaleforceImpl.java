@@ -2,6 +2,9 @@ package virtualcrm.service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import virtualcrm.Configuration.SaleforceConfig;
 import virtualcrm.model.GeographicPointDto;
 import virtualcrm.model.LeadConversor;
@@ -16,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class SaleforceImpl implements CRMService {
 
     @Override
@@ -39,10 +43,14 @@ public class SaleforceImpl implements CRMService {
         return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
     }
 
+    @Autowired
+    private SaleforceConfig saleforceConfig;
+
     private String GETRequestToSaleforce(String query) {
         try {
-            final String token = SaleforceConfig.getToken();
-            final String endpoint = SaleforceConfig.getEndpoint();
+
+            final String token = saleforceConfig.getToken();
+            final String endpoint = saleforceConfig.getEndpoint();
 
             final String url = endpoint + "?q=" + query;
 
