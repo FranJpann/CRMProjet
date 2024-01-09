@@ -12,7 +12,6 @@ import org.apache.thrift.transport.TTransportException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
 public class InternalApp {
 
 	public static InternalCRMImpl impl;

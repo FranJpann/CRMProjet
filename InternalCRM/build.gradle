@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'war'
+    id 'application'
     id 'org.springframework.boot' version '3.1.3'
     id 'io.spring.dependency-management' version '1.1.3'
     id 'org.gretty' version '4.1.0'
@@ -9,6 +10,10 @@ plugins {
 
 group = 'com.internalcrm'
 version = '0.0.1-SNAPSHOT'
+
+application {
+    mainClass = 'internalcrm.app.InternalApp'
+}
 
 gretty {
     httpPort = project.hasProperty("httpPort") ? project.httpPort as int : 8080
