@@ -14,6 +14,10 @@ findLeadsByDate() {
   echo "$result"
 }
 
+mergeLeads() {
+
+}
+
 getToken() {
   read -p "Entrez votre login salesforce : " login
   read -s -p "Entrez votre mot de passe : " password
