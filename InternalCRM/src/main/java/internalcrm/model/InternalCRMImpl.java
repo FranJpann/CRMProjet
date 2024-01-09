@@ -18,7 +18,6 @@ public class InternalCRMImpl implements InternalCRMService.Iface {
         return ModelConversor.ModelToInternalLeadDTO(models);
     }
 
-    // TO IMPLEMENT
     @Override
     public List<InternalLeadDTO> findLeadsByDate(String startDate, String endDate) throws TException {
         List<Model> models;
