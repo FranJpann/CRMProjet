@@ -37,7 +37,9 @@ elif [ "$1" == "getToken" ]; then
 elif [ "$1" == "runDocker" ]; then
   sudo docker-compose build
   sudo docker-compose up
+elif [ "$1" == "-h" ] || [ "$1" == "-help" ]; then
+    printf "Fonctions disponibles : \n findLeads (lowAnnualRevenue) (highAnnualRevenue) \n findLeadsByDate (startDate) (endDate) \n getToken \n runDocker \n"
 else
-  echo "Fonction inconnue : $1. Veuillez spécifier une commande correcte (findLeads, findLeadsByDate, getToken, runDocker)."
+  echo "Fonction inconnue : $1. Veuillez utiliser -h ou -help pour voir les commandes disponibles."
   exit 1
 fi
