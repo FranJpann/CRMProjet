@@ -4,14 +4,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import virtualcrm.model.VirtualLeadDto;
-import virtualcrm.service.VirtualCRMImpl;
+import virtualcrm.service.VirtualCRMService;
 
 import java.util.List;
 
 @RestController
 public class ApiController {
 
-    VirtualCRMImpl virtualCRM = new VirtualCRMImpl();
+    VirtualCRMService virtualCRM = new VirtualCRMService();
     @RequestMapping("/findLeads")
     public String getLead(@RequestParam(value = "lowAnnualRevenue")long lowAnnualRevenue, @RequestParam(value = "highAnnualRevenue")long highAnnualRevenue,
                         @RequestParam(value = "state")String state) {

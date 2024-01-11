@@ -12,7 +12,7 @@ import virtualcrm.thrift.InternalLeadDTO;
 import java.util.Calendar;
 import java.util.List;
 
-public class VirtualCRMImpl implements CRMService {
+public class VirtualCRMService implements CRMService {
 
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
