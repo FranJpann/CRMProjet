@@ -4,7 +4,7 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
-import virtualcrm.model.LeadConversor;
+import virtualcrm.utils.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
 import virtualcrm.thrift.InternalCRMService;
 import virtualcrm.thrift.InternalLeadDTO;

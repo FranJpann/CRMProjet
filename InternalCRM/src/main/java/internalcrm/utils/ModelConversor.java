@@ -1,5 +1,6 @@
-package internalcrm.model;
+package internalcrm.utils;
 
+import internalcrm.model.InternalLead;
 import internalcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;
@@ -7,9 +8,9 @@ import java.util.List;
 
 public class ModelConversor {
 
-    static List<InternalLeadDTO> ModelToInternalLeadDTO(List<Model> model) {
+    public static List<InternalLeadDTO> ModelToInternalLeadDTO(List<InternalLead> model) {
         List<InternalLeadDTO> listModelTO = new ArrayList<>();
-        for(Model m: model) {
+        for(InternalLead m: model) {
             listModelTO.add(new InternalLeadDTO(
                     m.getLastName() + ", " + m.getFirstName(),
                     m.getAnnualRevenue(),
@@ -27,9 +28,9 @@ public class ModelConversor {
         return listModelTO;
     }
 
-    static Model InternalLeadDTOToModel(InternalLeadDTO internalLeadDTO) {
+    public static InternalLead InternalLeadDTOToModel(InternalLeadDTO internalLeadDTO) {
         String[] names = internalLeadDTO.getName().split(", ");
-        return new Model(
+        return new InternalLead(
                 names[1],
                 names[0],
                 internalLeadDTO.getAnnualRevenue(),

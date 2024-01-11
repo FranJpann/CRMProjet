@@ -1,8 +1,10 @@
-package internalcrm.model;
+package internalcrm.service;
 
 import internalcrm.database.Database;
+import internalcrm.model.InternalLead;
 import internalcrm.thrift.InternalCRMService;
 import internalcrm.thrift.InternalLeadDTO;
+import internalcrm.utils.ModelConversor;
 import org.apache.thrift.TException;
 
 import java.text.ParseException;
@@ -14,13 +16,13 @@ public class InternalCRMImpl implements InternalCRMService.Iface {
 
     @Override
     public List<InternalLeadDTO> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) throws TException {
-        List<Model> models = database.getModels(lowAnnualRevenue, highAnnualRevenue, state);
+        List<InternalLead> models = database.getModels(lowAnnualRevenue, highAnnualRevenue, state);
         return ModelConversor.ModelToInternalLeadDTO(models);
     }
 
     @Override
     public List<InternalLeadDTO> findLeadsByDate(String startDate, String endDate) throws TException {
-        List<Model> models;
+        List<InternalLead> models;
 
         try {
             models = database.getModelsByDate(startDate, endDate);

@@ -1,22 +1,16 @@
 package internalcrm.app;
 
-import internalcrm.model.InternalCRMImpl;
+import internalcrm.service.InternalCRMImpl;
 import internalcrm.thrift.InternalCRMService;
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
-import org.apache.thrift.transport.TTransportException;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class InternalApp {
 
 	public static InternalCRMImpl impl;
 	public static InternalCRMService.Processor processor;
-
 	public static int port = 9090;
 	public static void main(String[] args) {
 		try {

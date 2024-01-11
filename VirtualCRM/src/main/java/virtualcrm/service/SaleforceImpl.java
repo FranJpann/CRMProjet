@@ -11,7 +11,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import virtualcrm.configuration.ConfigProperties;
-import virtualcrm.model.LeadConversor;
+import virtualcrm.utils.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
 
 import java.io.BufferedReader;
