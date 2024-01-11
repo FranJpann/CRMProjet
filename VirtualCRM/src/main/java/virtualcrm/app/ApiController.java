@@ -17,8 +17,11 @@ public class ApiController {
                         @RequestParam(value = "state")String state) {
         List<VirtualLeadDto> virtualLeads = virtualCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
         String response = "{";
+        bool v = false;
         for(VirtualLeadDto lead: virtualLeads){
-            response += "{"+lead.toString()+"},";
+            if(!v) v==true;
+            else response += ","
+            response += "{"+lead.toString()+"}";
         }
         return response + "}";
     }
@@ -27,7 +30,10 @@ public class ApiController {
     public String getLeadByDate(@RequestParam(value = "startDate")String startDate, @RequestParam(value = "endDate")String endDate) {
         List<VirtualLeadDto> virtualLeads = virtualCRM.findLeadsByDate(startDate, endDate);
         String response = "{";
+        bool v = false;
         for(VirtualLeadDto lead: virtualLeads){
+            if(!v) v==true;
+            else response += ","
             response += "{"+lead.toString()+"},";
         }
         return response + "}";
