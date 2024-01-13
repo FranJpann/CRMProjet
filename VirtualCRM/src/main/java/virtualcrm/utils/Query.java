@@ -1,8 +1,6 @@
 package virtualcrm.utils;
 
 import virtualcrm.model.VirtualLeadDto;
-import virtualcrm.service.VirtualCRMService;
-import virtualcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;
 import java.util.List;

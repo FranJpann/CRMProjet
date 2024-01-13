@@ -3,7 +3,6 @@ package virtualcrm.utils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import virtualcrm.model.VirtualLeadDto;
-import virtualcrm.service.GeolocalisationImpl;
 import virtualcrm.thrift.InternalLeadDTO;
 
 import java.util.ArrayList;

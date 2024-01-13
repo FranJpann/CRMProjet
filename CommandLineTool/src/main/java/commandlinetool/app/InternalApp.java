@@ -1,7 +1,5 @@
 package commandlinetool.app;
 
-import commandlinetool.service.VirtualCRMAPIService;
-
 import java.io.IOException;
 
 public class InternalApp {
