@@ -18,12 +18,13 @@ public class VirtualCRMService implements CRMService {
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
         InternalCRMImpl internalCRM = new InternalCRMImpl();
         SaleforceImpl saleforce = new SaleforceImpl();
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
 
         List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
                 saleforce.findLeads(lowAnnualRevenue, highAnnualRevenue, state),
                 internalCRM.findLeads(lowAnnualRevenue, highAnnualRevenue, state)
         );
-        LeadConversor.setGeolocalisation(virtualLeads);
+        geolocalisation.setGeolocalisation(virtualLeads);
 
         return virtualLeads;
     }
@@ -32,12 +33,13 @@ public class VirtualCRMService implements CRMService {
     public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
         InternalCRMImpl internalCRM = new InternalCRMImpl();
         SaleforceImpl saleforce = new SaleforceImpl();
+        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
 
         List<VirtualLeadDto> virtualLeads = LeadConversor.mergeListsVirtualLeads(
                 saleforce.findLeadsByDate(startDate, endDate),
                 internalCRM.findLeadsByDate(startDate, endDate)
         );
-        LeadConversor.setGeolocalisation(virtualLeads);
+        geolocalisation.setGeolocalisation(virtualLeads);
 
         return virtualLeads;
     }

@@ -73,17 +73,4 @@ public class LeadConversor {
 
         return resultList;
     }
-
-    public static void setGeolocalisation(List<VirtualLeadDto> virtualLeads) {
-        GeolocalisationImpl geolocalisation = new GeolocalisationImpl();
-        String query;
-        for(VirtualLeadDto virtualLead: virtualLeads){
-            query = "city="+virtualLead.getCity().replaceAll(" ", "+")+
-                    "&country="+virtualLead.getCountry().replaceAll(" ", "+")+
-                    "&postalcode="+virtualLead.getPostalCode().replaceAll(" ", "+")+
-                    "&street="+virtualLead.getStreet().replaceAll(" ", "+")+
-                    "&format=json&limit=1";
-            virtualLead.setGeographicPointDto(geolocalisation.GETRequestToOpenStreetMap(query));
-        }
-    }
 }
