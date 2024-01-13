@@ -1,0 +1,4 @@
+rootProject.name = 'CRMProjet'
+include 'InternalCRM'
+include 'CommandLineTool'
+include 'VirtualCRM'

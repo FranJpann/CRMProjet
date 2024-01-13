@@ -8,7 +8,7 @@ plugins {
     id "com.linecorp.thrift-gradle-plugin" version "0.5.0"
 }
 
-group = 'com.internalcrm'
+group = 'com.crmprojet'
 version = '0.0.1-SNAPSHOT'
 
 application {
