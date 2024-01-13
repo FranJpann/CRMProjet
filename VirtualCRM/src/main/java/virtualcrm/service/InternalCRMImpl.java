@@ -12,8 +12,8 @@ import virtualcrm.thrift.InternalLeadDTO;
 import java.util.List;
 
 public class InternalCRMImpl implements CRMService{
-    public static String internalHost = "172.17.0.1";
-    public static int internalPort = 9090;
+    private final String internalHost = "localhost";
+    private final int internalPort = 9090;
 
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {

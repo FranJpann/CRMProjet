@@ -20,6 +20,8 @@ public class VirtualCRMAPIService {
 
         String rep = "";
 
+        System.out.println(lowAnnualRevenue + " " + highAnnualRevenue + " " + state);
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpUriRequest httppost = RequestBuilder.post()

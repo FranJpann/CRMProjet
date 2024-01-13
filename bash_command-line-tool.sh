@@ -40,7 +40,7 @@ elif [ "$1" == "runDocker" ]; then
 elif [ "$1" == "appRun" ]; then
   ./gradlew --parallel :VirtualCRM:appRun :InternalCRM:run
 elif [ "$1" == "-h" ] || [ "$1" == "-help" ]; then
-    printf "Fonctions disponibles : \n findLeads (lowAnnualRevenue) (highAnnualRevenue) \n findLeadsByDate (YYYY-MM-dd) (YYYY-MM-dd) \n getToken \n runDocker (Il faut lancer le daemon Docker) \n"
+    printf "Fonctions disponibles : \n findLeads (lowAnnualRevenue) (highAnnualRevenue) (state) \n findLeadsByDate (YYYY-MM-dd) (YYYY-MM-dd) \n getToken \n runDocker (Il faut lancer le daemon Docker) \n appRun"
 else
   echo "Fonction inconnue : $1. Veuillez utiliser -h ou -help pour voir les commandes disponibles."
   exit 1
