@@ -6,33 +6,30 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.*;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import virtualcrm.configuration.ConfigProperties;
 import virtualcrm.utils.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
+import virtualcrm.utils.Query;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class SaleforceImpl implements CRMService {
 
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
-        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+WHERE+AnnualRevenue+>=+"+lowAnnualRevenue+"+AND+AnnualRevenue+<=+"+highAnnualRevenue;
+        String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+" +
+                "WHERE+AnnualRevenue>="+lowAnnualRevenue+
+                "+AND+AnnualRevenue<="+highAnnualRevenue;
 
         String response = GETRequestToSaleforce(query);
 
         JSONObject responseJSON = new JSONObject(response);
 
-        return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
+        return Query.QueryState(LeadConversor.JSONLeadsToVirtualLeads(responseJSON), state);
     }
 
     @Override
