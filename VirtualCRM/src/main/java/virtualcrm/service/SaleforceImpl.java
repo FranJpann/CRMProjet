@@ -18,6 +18,9 @@ import java.util.List;
 
 public class SaleforceImpl implements CRMService {
 
+    /*  SaleforceImpl    */
+    /*  Implémentation des services de récupération des données dans l'API SaleForce */
+
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
         String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+" +

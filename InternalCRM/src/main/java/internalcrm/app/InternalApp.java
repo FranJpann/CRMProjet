@@ -9,6 +9,9 @@ import org.apache.thrift.transport.TServerTransport;
 
 public class InternalApp {
 
+	/* InternalApp */
+	/* Met en place un serveur Thrift */
+
 	public static InternalCRMImpl impl;
 	public static InternalCRMService.Processor processor;
 	public static int port = 9090;

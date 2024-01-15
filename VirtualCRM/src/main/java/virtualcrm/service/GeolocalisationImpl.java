@@ -13,6 +13,10 @@ import java.net.URL;
 import java.util.List;
 
 public class GeolocalisationImpl implements GeolocalisationService{
+
+    /*  GeolocalisationImpl    */
+    /*  Implémentation du service de géolocalisation */
+
     @Override
     public GeographicPointDto GETRequestToOpenStreetMap(String query) {
 

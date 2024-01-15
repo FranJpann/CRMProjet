@@ -1,6 +1,10 @@
 package internalcrm.model;
 
 public class InternalLead {
+
+    /*  InternalLead    */
+    /*  Bean pour accueillir les informations d'un InternalLeadDTO  */
+
     private String firstName;
     private String lastName;
     private Double annualRevenue;

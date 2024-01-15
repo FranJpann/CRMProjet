@@ -10,6 +10,7 @@ import java.util.List;
 
 public class LeadConversor {
 
+    // Prends en paramètre une liste d'InternalLeadDTO et renvoie une liste de VirtualLeadDTO
     public static List<VirtualLeadDto> internalLeadsToVirtualLeads(List<InternalLeadDTO> internalLeads) {
         List<VirtualLeadDto> virtualLeads = new ArrayList<>();
 
@@ -32,6 +33,7 @@ public class LeadConversor {
         return  virtualLeads;
     }
 
+    // Prends en paramètre un objet JSON et renvoie une liste de VirtualLeadDTO
     public static List<VirtualLeadDto> JSONLeadsToVirtualLeads(JSONObject response) {
         JSONArray records = new JSONArray(response.get("records").toString());
 
@@ -63,6 +65,8 @@ public class LeadConversor {
         return virtualLeads;
     }
 
+    // Prends en paramètre deux listes de VirtualLeadDTO et renvoie une liste de VirtualLeadDTO qui rassemble
+    // Les deux listes en paramètre
     public static List<VirtualLeadDto> mergeListsVirtualLeads(List<VirtualLeadDto> leads1, List<VirtualLeadDto> leads2){
         List<VirtualLeadDto> resultList = leads1;
 

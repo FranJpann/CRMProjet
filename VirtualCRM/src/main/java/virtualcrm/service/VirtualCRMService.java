@@ -7,6 +7,9 @@ import java.util.List;
 
 public class VirtualCRMService implements CRMService {
 
+    /*  VirtualCRMService    */
+    /*  Implémentation des services du VirtualCRM */
+
     @Override
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
         InternalCRMImpl internalCRM = new InternalCRMImpl();

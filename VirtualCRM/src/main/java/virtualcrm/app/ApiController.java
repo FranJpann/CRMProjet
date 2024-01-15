@@ -11,6 +11,14 @@ import java.util.List;
 @RestController
 public class ApiController {
 
+    /*  ApiController   */
+    /*  Mets en place une API REST :
+
+    findLeads
+    findLeadsByDate
+
+     */
+
     VirtualCRMService virtualCRM = new VirtualCRMService();
     @RequestMapping("/findLeads")
     public String getLead(@RequestParam(value = "lowAnnualRevenue")long lowAnnualRevenue, @RequestParam(value = "highAnnualRevenue")long highAnnualRevenue,

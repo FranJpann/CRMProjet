@@ -12,6 +12,10 @@ import virtualcrm.thrift.InternalLeadDTO;
 import java.util.List;
 
 public class InternalCRMImpl implements CRMService{
+
+    /*  InternalCRMImpl    */
+    /*  Implémentation des services de récupération des données de l'API Apache thrift l'InternalCRM */
+
     private final String internalHost = "localhost";
     private final int internalPort = 9090;
 

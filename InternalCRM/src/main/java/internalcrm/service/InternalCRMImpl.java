@@ -12,6 +12,9 @@ import java.util.List;
 
 public class InternalCRMImpl implements InternalCRMService.Iface {
 
+    /*  InternalCRMImpl */
+    /* Services de l'internalCRM */
+
     Database database = new Database();
 
     @Override

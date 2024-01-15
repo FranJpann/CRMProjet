@@ -10,6 +10,9 @@ import java.util.List;
 
 public class Database {
 
+    /*  Database    */
+    /*  Met à disposition une base de donnée contenant une liste d'InternalLead */
+
     private List<InternalLead> models;
 
     public Database() {

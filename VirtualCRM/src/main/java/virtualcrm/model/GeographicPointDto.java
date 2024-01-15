@@ -1,6 +1,10 @@
 package virtualcrm.model;
 
 public class GeographicPointDto {
+
+    /*  GeographicPointDto    */
+    /*  Bean pour la latitude et longitude */
+
     private Double latitude;
     private Double longitude;
 

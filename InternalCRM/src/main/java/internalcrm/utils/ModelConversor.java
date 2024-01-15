@@ -8,6 +8,8 @@ import java.util.List;
 
 public class ModelConversor {
 
+
+    // Prends en paramètre une liste d'InternalLead et renvoie une liste d'InternalLeadDTO
     public static List<InternalLeadDTO> ModelToInternalLeadDTO(List<InternalLead> model) {
         List<InternalLeadDTO> listModelTO = new ArrayList<>();
         for(InternalLead m: model) {
@@ -28,6 +30,7 @@ public class ModelConversor {
         return listModelTO;
     }
 
+    // Prends en paramètre un InternalLeadDTO et renvoie un InternalLead
     public static InternalLead InternalLeadDTOToModel(InternalLeadDTO internalLeadDTO) {
         String[] names = internalLeadDTO.getName().split(", ");
         return new InternalLead(

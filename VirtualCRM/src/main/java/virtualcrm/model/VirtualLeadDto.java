@@ -1,6 +1,10 @@
 package virtualcrm.model;
 
 public class VirtualLeadDto {
+
+    /*  VirtualLeadDTO    */
+    /*  Bean */
+
     private String firstName;
     private String lastName;
     private Double annualRevenue;

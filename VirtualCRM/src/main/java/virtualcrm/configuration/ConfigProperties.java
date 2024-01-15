@@ -5,6 +5,9 @@ import java.util.Properties;
 
 public class ConfigProperties {
 
+    /*  ConfigProperties    */
+    /*  récupère les informations de application.properties */
+
     Properties props = new Properties();
 
     public ConfigProperties() throws IOException {
