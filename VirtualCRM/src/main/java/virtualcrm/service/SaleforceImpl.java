@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import virtualcrm.configuration.ConfigProperties;
 import virtualcrm.utils.LeadConversor;
 import virtualcrm.model.VirtualLeadDto;
-import virtualcrm.utils.Query;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,13 +22,14 @@ public class SaleforceImpl implements CRMService {
     public List<VirtualLeadDto> findLeads(long lowAnnualRevenue, long highAnnualRevenue, String state) {
         String query = "SELECT+FirstName,LastName,AnnualRevenue,Phone,Address,Company,CreatedDate+FROM+Lead+" +
                 "WHERE+AnnualRevenue>="+lowAnnualRevenue+
-                "+AND+AnnualRevenue<="+highAnnualRevenue;
+                "+AND+AnnualRevenue<="+highAnnualRevenue+
+                "+AND+state+=+'"+state+"'";
 
         String response = GETRequestToSaleforce(query);
 
         JSONObject responseJSON = new JSONObject(response);
 
-        return Query.QueryState(LeadConversor.JSONLeadsToVirtualLeads(responseJSON), state);
+        return LeadConversor.JSONLeadsToVirtualLeads(responseJSON);
     }
 
     @Override
