@@ -22,8 +22,8 @@ Run both VirtualCRM & InternalCRM :
 ### Arguments
 
 Argument availables :
-```findLeads lowAnnualRevenue highAnnualrevenue State```
-```findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)```
+```findLeads lowAnnualRevenue highAnnualrevenue State``` \
+```findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)``` \
 ```mergeLeads```
 
 ### Execution
