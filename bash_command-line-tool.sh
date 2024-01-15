@@ -8,6 +8,10 @@ findLeadsByDate() {
   ./gradlew :CommandLineTool:run --args="findLeadsByDate ${startDate} ${endDate}"
 }
 
+mergeLeads() {
+  ./gradlew :CommandLineTool:run --args="mergeLeads"
+}
+
 appRun() {
   ./gradlew --parallel :VirtualCRM:appRun :InternalCRM:run
 }
@@ -23,6 +27,8 @@ elif [ "$1" == "findLeadsByDate" ]; then
   findLeadsByDate
 elif [ "$1" == "appRun" ]; then
   appRun
+elif [ "$1" == "mergeLeads" ]; then
+  mergeLeads
 elif [ "$1" == "-h" ] || [ "$1" == "-help" ]; then
     printf "Fonctions disponibles : \n findLeads (lowAnnualRevenue) (highAnnualRevenue) (state) \n findLeadsByDate (YYYY-MM-dd) (YYYY-MM-dd) \n appRun"
 else
