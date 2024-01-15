@@ -44,9 +44,9 @@ exemple :
 
 ### Arguments
 
-`appRun` : Run InternalCRM & VirtualCRM
-`findLeads lowAnnualRevenue highAnnualrevenue State`
-`findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)`
+`appRun` : Run InternalCRM & VirtualCRM \
+`findLeads lowAnnualRevenue highAnnualrevenue State` \
+`findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)` \
 `mergeLeads`
 
 ### Execution
