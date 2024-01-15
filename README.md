@@ -1,5 +1,9 @@
 # How to run ?
 
+[1. Run InternalCRM and VirtualCRM using gradlew](#run-internalcrm-and-virtualcrm-using-gradlew)
+[2. Run CommandLineTool (Client) using gradlew](#run-commandlinetool-client-using-gradlew)
+[3. Run modules with bash_command-line-tool](#run-modules-with-bash_command-line-tool)
+
 ## Run InternalCRM and VirtualCRM using gradlew
 
 VirtualCRM :
@@ -21,7 +25,7 @@ Run both VirtualCRM & InternalCRM :
 
 ### Arguments
 
-Argument availables :
+Argument availables : \
 ```findLeads lowAnnualRevenue highAnnualrevenue State``` \
 ```findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)``` \
 ```mergeLeads```
