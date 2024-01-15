@@ -25,16 +25,14 @@ Run both VirtualCRM & InternalCRM :
 
 ### Arguments
 
-Argument availables : \
 ```findLeads lowAnnualRevenue highAnnualrevenue State``` \
 ```findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)``` \
 ```mergeLeads```
 
 ### Execution
 
-CommandLineTool :
 ```gradle
-./gradlew :CommandLineTool:run --args="(arguments here)"
+./gradlew :CommandLineTool:run --args="arguments here"
 ```
 
 exemple :
@@ -44,10 +42,9 @@ exemple :
 
 ## Run modules with bash_command-line-tool
 
-### Arguments availables
+### Arguments
 
 `appRun` : Run InternalCRM & VirtualCRM
-
 `findLeads lowAnnualRevenue highAnnualrevenue State`
 `findLeadsByDate startDate(YYYY-MM-DD) endDate(YYYY-MM-DD)`
 `mergeLeads`
